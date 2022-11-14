@@ -1,0 +1,5 @@
+httpx
+pydantic
+cx_Oracle
+schedule
+dynaconf

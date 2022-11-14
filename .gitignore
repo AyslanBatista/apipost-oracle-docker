@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vscodelocal
+*.log.*
+
+# Ignore dynaconf secret files
+.secrets.*
