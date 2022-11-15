@@ -15,15 +15,17 @@ log = get_logger()
 def connect_oracle(select: str) -> list:
     """Função faz a conexão com banco de dados oracle utilizando as
     variáveis de autenticação `USER`, `PASSWORD`, `BANCO`, que estão
-    armazenadas em um arquivo `secrets`, com a autenticação efetuado a
-    função faz um select com base no argumento em que foi passado `select`.
-    Recebendo a consulta do banco ela é organizada e retorna os dados.
+    armazenadas em um arquivo `secrets`. Com a autenticação efetuada, a
+    função faz um select com base no argumento `select` que foi passado
+    para a função.
+    Recebendo a consulta do banco, os dados são organizados e retornados
+    em uma lista.
     
     Args:
         select (str): String contendo o select que será feito no banco
 
     Returns:
-        list: Retorna dados em formato de tupla com base no `select`
+        list: Retorna dados em formato de lista com base no `select`
     """
     try:
         # Fazendo conexão com o banco de dados
@@ -47,14 +49,15 @@ def connect_oracle(select: str) -> list:
 def ajustar_data_cpf(tupla: tuple) -> list:
     """Função recebe uma tupla com todos os campos que serão enviados,
     a tupla é transformado em uma lista para pegar o valor 0, 2 e 3,
-    valor 0 é feito a formatação data conforme o solicitante,
+    valor 0 é feito a formatação data conforme o parâmetro da API,
     valor 2 é descompactado e retirado a informação do cpf de uma string
     e retornado essa informação ao valor 2,
     valor 3 é alterado para ser utilizado o número de chave SAT como
     numero do documento.
 
     Args:
-        tupla (tuple): tupla com as informações do campo que será enviado
+        tupla (tuple): tupla com todos os dados, que será extraído alguns
+        campos para formatação e organização
 
     Returns:
         list: Retorna uma lista com os dados para o Json
@@ -78,9 +81,8 @@ def gravar_valor(valor: str):
     """Função recebe o valor único que está sendo utilizado no número
     do documento, grava esse valor em um arquivo de log onde esse
     arquivo é mapeado na variável `LOG_PATH` no documento `utils.py`.
-    Intuito da função é armazenar todos os números de documentos em
-    que foi enviado para não ter tentativa de envio de documentos
-    em duplicidade.
+    Intuito da função é armazenar todos os números dos documentos
+    enviados para não ter tentativa de envio em duplicidade.
 
     Args:
         valor (str): Valor do número do documento em que foi enviado
@@ -112,10 +114,11 @@ def ler_valor():
 
 
 def arquivo_json(lista_json: list, lista_produtos: list) -> Dict:
-    """Função recebe uma `lista_json` com as informações dos campos referente
-    a compra, `lista_produtos` com todos os produtos da compra e informações
-    da campanha que está armazenado em um arquivo `secrets`.
-    Após estruturar todas as informações ele retorna um dicionario que
+    """Função recebe um parâmetro `lista_json` com as informações dos
+    campos referente a compra, e outro parâmetro `lista_produtos` com
+    todos os produtos da compra e informações da campanha que está
+    armazenado em um arquivo `secrets`.
+    Após estruturar todas as informações ele retorna um dicionário que
     poder ser usado como JSON.
 
     Args:
