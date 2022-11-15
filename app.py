@@ -28,9 +28,9 @@ class Token(BaseModel):
 
 def get_token() -> Token:
     """Essa função recupera um token de autenticação, através da url
-    informada na variavel `URL_TOKEN` que está em um arquivo `secrets`,
-    utilizando as informações necessarias para autenticação em formato
-    json que está na variavel `AUTENTICACAO` no mesmo arquivo `secrets`.
+    informada na variável `URL_TOKEN` que está em um arquivo `secrets`,
+    utilizando as informações necessárias para autenticação em formato
+    json que está na variável `AUTENTICACAO` no mesmo arquivo `secrets`.
 
     Raises:
         RuntimeError: Erro ao tentar recuperar o token
@@ -120,7 +120,7 @@ def enviar_via_api(arquivo: json) -> int:
 
 def ajustar_e_enviar(tupla_dados: tuple, produtos: list) -> Any:
     """Função faz a junção de outras duas funções `ajustar_data_cpf`
-    e `aquivo_json` que são responsaveis por organizar a documentação,
+    e `aquivo_json` responsáveis por organizar a documentação,
     depois transformar tudo em um JSON, após a organização da documentação
     ele chama a função `enviar_via_api` que faz o envio via API.
 
@@ -139,7 +139,7 @@ def ajustar_e_enviar(tupla_dados: tuple, produtos: list) -> Any:
 
 def juntar_produtos(new_dados: tuple) -> int:
     """Função recebe os dados que serão enviados e faz a junção de 
-    todos os produtos da memsa compra com base na chavesat, acumulando os 
+    todos os produtos da mesma compra com base na chavesat, acumulando os 
     produtos em uma tupla, após fazer a junção dos produtos ele chama a
     função `ajustar_e_enviar`.
 
@@ -147,7 +147,7 @@ def juntar_produtos(new_dados: tuple) -> int:
         new_dados (tuple): Dados recentes que contem informação do SQL
 
     Returns:
-        int: Retorna a quantidade de envio efetudo com sucesso
+        int: Retorna a quantidade de envio efetuado com sucesso
     """
     quantiade_envios = 0
     cupom_anterior = 0
@@ -211,16 +211,16 @@ def juntar_produtos(new_dados: tuple) -> int:
 
 
 def main() -> bool:
-    """Função principal que é responsavel por chamar as demais funções,
+    """Função principal responsável por chamar as demais funções,
     inicia extraindo os dados através da função `connect_oracle` utilizando
-    uma variavel `SELECT` que está contida em um arquivo secrets.
+    uma variável `SELECT` que está contida em um arquivo secrets.
     Recebendo os dados direto do banco ele faz um for em cada linha para
     verificar se a chavesat está gravada no arquivo `valor_log.log` caso não
     esteja, ele acumula as informações em uma lista para ser enviado para a
     função `juntar_produtos` que retornará a quantidade de envios.
 
     Returns:
-        bool: Retorna valor true para que o schedule prosseguida com a proxima
+        bool: Retorna valor true para que o schedule prosseguida com a próxima
         tarefa
     """
     dados_recentes = []
@@ -254,5 +254,3 @@ def main() -> bool:
         print(
             f"Nenhum registro disponível para ser enviado {envio}")
     return True
-
-main()

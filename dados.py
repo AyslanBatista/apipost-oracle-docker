@@ -14,9 +14,9 @@ log = get_logger()
 
 def connect_oracle(select: str) -> list:
     """Função faz a conexão com banco de dados oracle utilizando as
-    variaveis de autenticação `USER`, `PASSWORD`, `BANCO`, que estão
+    variáveis de autenticação `USER`, `PASSWORD`, `BANCO`, que estão
     armazenadas em um arquivo `secrets`, com a autenticação efetuado a
-    função faz um select com base no argumento que foi passado `select`.
+    função faz um select com base no argumento em que foi passado `select`.
     Recebendo a consulta do banco ela é organizada e retorna os dados.
     
     Args:
@@ -47,14 +47,14 @@ def connect_oracle(select: str) -> list:
 def ajustar_data_cpf(tupla: tuple) -> list:
     """Função recebe uma tupla com todos os campos que serão enviados,
     a tupla é transformado em uma lista para pegar o valor 0, 2 e 3,
-    valor 0 é feito a formatação data de acordo com o solicitante,
+    valor 0 é feito a formatação data conforme o solicitante,
     valor 2 é descompactado e retirado a informação do cpf de uma string
     e retornado essa informação ao valor 2,
-    valor 3 é alterado para ser utilizado o numero de chave SAT como
+    valor 3 é alterado para ser utilizado o número de chave SAT como
     numero do documento.
 
     Args:
-        tupla (tuple): tupla com a informações do campo que será enviado
+        tupla (tuple): tupla com as informações do campo que será enviado
 
     Returns:
         list: Retorna uma lista com os dados para o Json
@@ -75,16 +75,15 @@ def ajustar_data_cpf(tupla: tuple) -> list:
 
 
 def gravar_valor(valor: str):
-    """Função recebe o valor unico que está sendo utilizado no
-    numero do documento, grava esse valor em um arquivo de log
-    onde esse arquivo é mapeado na variavel `LOG_PATH` dentro do
-    documento `utils.py`.
-    Intuito da função é armazenar todos os numeros de documentos
-    que foi enviado para que não tenha tentiva de envio de documentos
+    """Função recebe o valor único que está sendo utilizado no número
+    do documento, grava esse valor em um arquivo de log onde esse
+    arquivo é mapeado na variável `LOG_PATH` no documento `utils.py`.
+    Intuito da função é armazenar todos os números de documentos em
+    que foi enviado para não ter tentativa de envio de documentos
     em duplicidade.
 
     Args:
-        valor (str): Valor do numero do documento que foi enviado
+        valor (str): Valor do número do documento em que foi enviado
     """
     try:
         with open(LOG_PATH, "a") as file_:
@@ -95,7 +94,7 @@ def gravar_valor(valor: str):
 
 
 def ler_valor():
-    """Função serve para ler um arquivo com o nome guardado na variavel
+    """Função serve para ler um arquivo com o nome guardado na variável
     `LOG_PATH` no arquivo utils.py, ao ler esse arquivo a função irá
     acumular as informações de cada linha em uma lista e retornar
     essa lista convertida em um set.
