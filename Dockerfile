@@ -12,6 +12,7 @@ ADD https://download.oracle.com/otn_software/linux/instantclient/217000/instantc
 RUN cd /opt/oracle && unzip -o /instantclient-sdk-linux.x64-21.7.0.0.0dbru.zip && apt-get remove unzip -y && rm -rf /var/cache/apk/*
 RUN rm ./instantclient-sdk-linux.x64-21.7.0.0.0dbru.zip
 
+# Copiando arquivo TNSNAMES
 COPY /Banco /opt/oracle/instantclient_21_7/network/admin
 COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt

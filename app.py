@@ -22,6 +22,7 @@ class Token(BaseModel):
     """Classe para armazenar o token de autenticação no atributo `token`
     e informações secundarias referente ao token no atributo `ativo`.
     """
+
     ativo: str
     token: str
 
@@ -124,14 +125,14 @@ def enviar_via_api(arquivo: json) -> int:
 def ajustar_e_enviar(tupla_dados: tuple, produtos: list) -> Any:
     """Função faz a junção de outras duas funções `ajustar_data_cpf`
     e `aquivo_json` responsáveis por organizar a documentação, depois
-    transformar tudo em um JSON. 
+    transformar tudo em um JSON.
     Após a organização da documentação ele chama a função `enviar_via_api`
     que faz o envio via API.
 
     Args:
         tupla_dados (tuple): Dados recentes que contem informação do SQL
         produtos (list): Lista de todos os produtos que será acrescentado
-        ao arquivo JSON 
+        ao arquivo JSON
     """
     ajuste_data_cpf = ajustar_data_cpf(tupla=tupla_dados)
     json_file = arquivo_json(
@@ -142,7 +143,7 @@ def ajustar_e_enviar(tupla_dados: tuple, produtos: list) -> Any:
 
 
 def juntar_produtos(new_dados: tuple) -> int:
-    """Função recebe os dados que serão enviados e faz a junção de 
+    """Função recebe os dados que serão enviados e faz a junção de
     todos os produtos da mesma compra com base na chavesat, acumulando
     os produtos em uma tupla, após fazer a junção de todos os produtos
     ele chama a função `ajustar_e_enviar`.
@@ -174,12 +175,11 @@ def juntar_produtos(new_dados: tuple) -> int:
                 cupom_anterior = cupom[0]
                 row_dados = row
                 lista_produtos.append(produto)
-                if (
-                    loops == len(new_dados) 
-                    and int(row[1]) == int(produto["valor"])
+                if loops == len(new_dados) and int(row[1]) == int(
+                    produto["valor"]
                 ):
                     quantiade_envios += ajustar_e_enviar(
-                        tupla_dados=row_dados,produtos=lista_produtos
+                        tupla_dados=row_dados, produtos=lista_produtos
                     )
 
             elif cupom_anterior == cupom[0]:
@@ -192,13 +192,13 @@ def juntar_produtos(new_dados: tuple) -> int:
                     lista_produtos.append(produto)
                 if loops == len(new_dados):
                     quantiade_envios += ajustar_e_enviar(
-                        tupla_dados=row_dados,produtos=lista_produtos
+                        tupla_dados=row_dados, produtos=lista_produtos
                     )
                 row_dados = row
 
             else:
                 quantiade_envios += ajustar_e_enviar(
-                    tupla_dados=row_dados,produtos=lista_produtos
+                    tupla_dados=row_dados, produtos=lista_produtos
                 )
                 if loops == len(new_dados):
                     quantiade_envios += ajustar_e_enviar(
@@ -248,14 +248,9 @@ def main() -> bool:
         log.error("%s test", str(error), exc_info=True)
         sys.exit(1)
     if envio == 1:
-        print(
-            f"Total de {envio} registro enviado com sucesso!"
-        )
+        print(f"Total de {envio} registro enviado com sucesso!")
     elif envio > 1:
-        print(
-            f"Total de {envio} registros enviados com sucesso!"
-        )
+        print(f"Total de {envio} registros enviados com sucesso!")
     else:
-        print(
-            f"Nenhum registro disponível para ser enviado {envio}")
+        print(f"Nenhum registro disponível para ser enviado {envio}")
     return True

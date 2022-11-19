@@ -20,7 +20,7 @@ def connect_oracle(select: str) -> list:
     para a função.
     Recebendo a consulta do banco, os dados são organizados e retornados
     em uma lista.
-    
+
     Args:
         select (str): String contendo o select que será feito no banco
 
@@ -33,7 +33,7 @@ def connect_oracle(select: str) -> list:
             user=settings.USER,
             password=settings.PASSWORD,
             dsn=settings.BANCO,
-            encoding="UTF-8"
+            encoding="UTF-8",
         ) as connection:
             with connection.cursor() as cursor:
                 cursor.execute(select)
@@ -67,7 +67,7 @@ def ajustar_data_cpf(tupla: tuple) -> list:
         valores = lista[2].split("|")
         data, hora = str(lista[0]).split(" ")
         dia, mes, ano = data.split("/")
-        data_formatada = '20{}-{}-{} {}'.format(ano, mes, dia, hora)
+        data_formatada = "20{}-{}-{} {}".format(ano, mes, dia, hora)
         lista[3] = valores[0]
         lista[2] = valores[3]
         lista[0] = data_formatada
@@ -150,8 +150,8 @@ def arquivo_json(lista_json: list, lista_produtos: list) -> Dict:
             "vendedor": {
                 "codigo": str(lista_json[9]),
                 "nome": settings.campanha["nome"],
-            }
-        }
+            },
+        },
     }
     print(json.dumps(json_file))
     return json_file

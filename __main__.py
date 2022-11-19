@@ -11,8 +11,8 @@ from app import main
 hora_inicial = "07:45"
 hora_final = "23:15"
 
-# Tempo que será executado a função, de 1 em 1 minuto
-@repeat(every(1).minutes)
+
+@repeat(every(1).minutes)  # Executando de 1 em 1 minuto
 def job():
     if __name__ == "__main__":
         main()
